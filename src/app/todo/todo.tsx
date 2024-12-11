@@ -2,7 +2,9 @@
 
 "use client";
 
+
 import React, { FC, useState } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
 import { useAppDispatch, useAppSelector } from '@/redux/store';
 import {
     addTodoAction,
@@ -29,7 +31,7 @@ const TodoList: FC = () => {
     // console.log("Todo states: ", todoData);
 
     // Note: Function to add todo item...!
-    const addTodoHandler = () => {
+    const addTodoHandler: () => void = () => {
 
         let isItemAlreadyExist: boolean = false;
 
@@ -55,7 +57,7 @@ const TodoList: FC = () => {
 
         const obj: InputState = {
             todoInput: states.todoInput,
-            id: new Date().getTime().toString()
+            id: nanoid() // Note: Generate a unique id...!
         };
 
         dispatch(addTodoAction(obj));
@@ -84,7 +86,7 @@ const TodoList: FC = () => {
     };
 
     // Note: Function to update todo item...!
-    const updateTodoHandler = () => {
+    const updateTodoHandler: () => void = () => {
         // Note: Handle validation...!
         if (states.todoInput.trim().length < 1) {
             console.log('Input field is required!');
@@ -105,7 +107,7 @@ const TodoList: FC = () => {
     };
 
     // Note: Function to cancel update todo item...!
-    const cancelHandler = () => {
+    const cancelHandler: () => void = () => {
         setIsEdit(false);
         setEditKey("");
         setStates({
