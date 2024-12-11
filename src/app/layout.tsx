@@ -1,10 +1,15 @@
 // Note: Layout file...!
+// Note: Redux persist has been commited in this project...!
 
 "use client";
 
 import React, { FC } from "react";
 import { Provider } from "react-redux";
-import { store } from "@/redux/store";
+// import { PersistGate } from "redux-persist/integration/react";
+import {
+  store,
+  // persistor
+} from "@/redux/store";
 import { RootLayoutProps } from "@/types/types";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -18,9 +23,11 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
   // console.log("Childrens: ", children);
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning={true}>
         <Provider store={store}>
+          {/* <PersistGate persistor={persistor}> */}
           {children}
+          {/* </PersistGate> */}
         </Provider>
       </body>
     </html>

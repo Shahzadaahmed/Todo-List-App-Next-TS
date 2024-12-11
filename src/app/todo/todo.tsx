@@ -2,7 +2,6 @@
 
 "use client";
 
-
 import React, { FC, useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { useAppDispatch, useAppSelector } from '@/redux/store';
@@ -13,6 +12,7 @@ import {
 } from '@/redux/actions/todo-actions/todo-actions';
 import Input from '@/components/input/input';
 import { InputState, UpdateTodo } from '@/types/types';
+import Header from '@/components/header/header';
 
 const TodoList: FC = () => {
 
@@ -119,7 +119,7 @@ const TodoList: FC = () => {
     return (
         <div>
             {/* Note: Heading Section */}
-            <h1> Todo List App using Next TS and Redux </h1>
+            <Header heading="Todo List App using Next TS and Redux" />
 
             {/* Note: Form Section */}
             <div>
@@ -143,12 +143,22 @@ const TodoList: FC = () => {
                 {
                     todoData && todoData.length > 0 ?
                         (
-                            todoData?.map((item: { todoInput: string, id: string }) => {
+                            todoData?.map((item: InputState) => {
                                 return (
                                     <li key={item.id}>
                                         {item.todoInput}
-                                        <button onClick={() => deleteTodoHandler(item.id)}> Delete Item </button>
-                                        <button onClick={() => editTodoHandler(item)}> Edit Item </button>
+                                        <button
+                                            onClick={() => deleteTodoHandler(item.id)}
+                                            disabled={isEdit}
+                                        >
+                                            Delete Item
+                                        </button>
+                                        <button
+                                            onClick={() => editTodoHandler(item)}
+                                            disabled={isEdit}
+                                        >
+                                            Edit Item
+                                        </button>
                                     </li>
                                 );
                             })

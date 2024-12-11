@@ -29,3 +29,8 @@ export interface InputProps {
     inputValue: string,
     onChangeHandler: (value: string) => void
 };
+
+// Note: Define the Header props interface...!
+export interface HeaderProps {
+    heading: string
+};
