@@ -104,6 +104,16 @@ const TodoList: FC = () => {
         });
     };
 
+    // Note: Function to cancel update todo item...!
+    const cancelHandler = () => {
+        setIsEdit(false);
+        setEditKey("");
+        setStates({
+            todoInput: "",
+            id: ""
+        });
+    };
+
     return (
         <div>
             {/* Note: Heading Section */}
@@ -115,12 +125,16 @@ const TodoList: FC = () => {
                     inputValue={states.todoInput}
                     onChangeHandler={(value) => setStates({ ...states, todoInput: value })}
                 />
-                <button
-                    // disabled={input.trim().length < 1}
-                    onClick={isEdit ? updateTodoHandler : addTodoHandler}
-                >
-                    {isEdit ? "Update Item" : "Add Item"}
-                </button>
+                <div>
+                    <button
+                        // disabled={input.trim().length < 1}
+                        onClick={isEdit ? updateTodoHandler : addTodoHandler}
+                    >
+                        {isEdit ? "Update Item" : "Add Item"}
+                    </button>
+
+                    {isEdit ? <button onClick={cancelHandler}> Cancel </button> : null}
+                </div>
             </div>
 
             <ul>
